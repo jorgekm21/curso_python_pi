@@ -49,9 +49,12 @@ class Moto(Vehiculos): #Esta clase esta heredando todo lo que tiene la clase Veh
         print("\nMarca: ", self.marca, "\nModelo: ", self.modelo, "\nEn Marcha: ", self.enmarcha, "\nAcelerando: ", 
             self.acelera, "\nFrenando: ", self.frena, "\n", self.hcaballito)
 
-class VElectricos(): #No hereda de nadie
+class VElectricos(Vehiculos): #No hereda de nadie
 
-    def __init__(self):
+    def __init__(self, marca, modelo):
+
+        super().__init__(marca, modelo)
+
         self.autonomia=100
 
     def cargar_Energia(self):
@@ -76,4 +79,4 @@ print(miFurgoneta.carga(True))
 class BicicletaElectrica(VElectricos,Vehiculos): #Herencia de multiples clases
     pass
 
-miBici=BicicletaElectrica() #Hereda del primer constructor que se le indico en la clase
+miBici=BicicletaElectrica("Aveo", "Especial") #Hereda del primer constructor que se le indico en la clase
