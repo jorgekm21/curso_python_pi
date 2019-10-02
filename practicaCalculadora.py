@@ -5,6 +5,9 @@ raiz=Tk()
 miFrame=Frame(raiz)
 miFrame.pack()
 
+operacion=""
+resultado=0
+
 #------------PANTALLA--------------------------------
 
 numeroPantalla=StringVar()
@@ -16,7 +19,40 @@ pantalla.config(background="black", fg="#03f943", justify="right")
 #-----------------PULSACIONES TECLADO----------------
 
 def numeroPulsado(num):
-    numeroPantalla.set(numeroPantalla.get() + num)
+
+	global operacion
+
+	if operacion!="":
+
+		numeroPantalla.set(num)
+		operacion=""
+
+	else:
+
+		numeroPantalla.set(numeroPantalla.get() + num)
+
+#----------------FUNCION SUMA------------------------
+
+def suma(num):
+
+	global operacion
+	global resultado
+
+	resultado+=int(num) #resultado=resultado+int(num)
+
+	operacion="suma"
+
+	numeroPantalla.set(resultado)
+
+#-----------------FUNCION RESULTADO------------------
+
+def el_resultado():
+
+	global resultado
+
+	numeroPantalla.set(resultado+int(numeroPantalla.get()))
+
+	resultado=0
 
 #-----------------FILA 1-----------------------------
 
@@ -57,9 +93,9 @@ botonComa=Button(miFrame, text=",", width=3, command=lambda:numeroPulsado("."))
 botonComa.grid(row=5, column=1)
 boton0=Button(miFrame, text="0", width=3, command=lambda:numeroPulsado("0"))
 boton0.grid(row=5, column=2)
-botonIgual=Button(miFrame, text="=", width=3)
+botonIgual=Button(miFrame, text="=", width=3, command=lambda:el_resultado())
 botonIgual.grid(row=5, column=3)
-botonSum=Button(miFrame, text="+", width=3)
+botonSum=Button(miFrame, text="+", width=3, command=lambda:suma(numeroPantalla.get()))
 botonSum.grid(row=4, column=4)
 
 raiz.mainloop()
